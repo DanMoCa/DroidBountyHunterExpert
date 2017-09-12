@@ -1,6 +1,7 @@
 package training.edu.droidbountyhunter;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,6 +42,11 @@ public class Home extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private Fragment[] fragments;
+    public static String UDID;
+
+    private static DBProvider oDB;
+    private static DBProvider oDBServicio;
+    public static DBProvider oDBContentProvider;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -51,6 +57,12 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if(!ServicioNotificaciones.isRunning()){
+            startService(new Intent(Home.this,ServicioNotificaciones.class));
+        }
+
+        UDID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,12 +82,10 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, Agregar.class);
-                startActivity(intent);
+                startActivityForResult(intent,0);
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,19 +96,27 @@ public class Home extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
         if (item.getItemId() == R.id.menu_agregar) {
-            Intent intent = new Intent(this, Agregar.class);
-            startActivity(intent);
-            return true;
+            intent = new Intent(this, Agregar.class);
+        }else if(item.getItemId() == R.id.menu_eliminar){
+            intent = new Intent(this, LogEliminacion.class);
         }
-
+        startActivityForResult(intent,0);
         return super.onOptionsItemSelected(item);
     }
 
     public void UpdateLists(int index){
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(index);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UpdateLists(resultCode);
+    }
 
     /**
      * Fragment multiuso para mostrar la lista de Fugitivos o Capturados acorde
@@ -137,6 +155,7 @@ public class Home extends AppCompatActivity {
                     intent.putExtra("title", fugitivo.getName());
                     intent.putExtra("mode", mode);
                     intent.putExtra("id", fugitivo.getId());
+                    intent.putExtra("photo",fugitivo.getPhoto());
                     startActivityForResult(intent,mode);
                 }
             });

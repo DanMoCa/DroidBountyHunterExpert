@@ -6,12 +6,22 @@
     <string name="title_fugitivos">Fugitivos</string>
     <string name="title_acercade">Acerca de...</string>
     <string name="menu_agregar">Agregar</string>
+    <string name="menu_logs_eliminacion">Logs de Eliminacion</string>
     <string name="boton_guardar">Guardar</string>
     <string name="boton_capturar">Capturar</string>
     <string name="boton_eliminar">Eliminar</string>
+    <string name="boton_foto">Tomar Foto</string>
     <string name="campo_nombre">Nombre del Fugitivo</string>
     <string name="title_activity_agregar">Nuevo Fugitivo</string>
     <string name="title_activity_detalle">Detalle Fugitivo</string>
+    <string name="title_activity_logs_eliminacion">Logs de Eliminacion</string>
+
+    <string name="add_webservice">Agregar servicios web</string>
+    <string name="add_xml">Agregar XML</string>
+    <string name="progreso">Progreso...</string>
+    <string name="btn_OpenGL">Foto OpenGL</string>
+    <string name="distorsion">Distorsion</string>
+    <string name="imagen_default">Imagen Default</string>
 </resources>
 
 

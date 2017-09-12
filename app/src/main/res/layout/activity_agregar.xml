@@ -22,6 +22,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/boton_guardar" />
+        android:onClick="OnSaveClick"
+        android:text="Guardar"/>
 
+    <Button
+        android:id="@+id/buttonAddWS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="OnWebServiceClick"
+        android:text="@string/add_webservice"/>
+
+    <Button
+        android:id="@+id/buttonAddXML"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="OnXMLClick"
+        android:text="@string/add_xml"/>
+
+    <TextView
+        android:id="@+id/txtProgreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/progreso"
+        />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_marginTop="8dp"/>
 </LinearLayout>
